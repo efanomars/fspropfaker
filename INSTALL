@@ -1,0 +1,101 @@
+Installation
+============
+
+If your Linux distribution has a package manager based on the DEB
+package format, like Debian, Ubuntu, Linux Mint and others, you
+can create a tar.gz file containing all the DEB binaries and shell
+scripts to install and uninstall them. On other distributions you can
+directly build and install everything to /usr/local.
+
+Scripts ending with .py usually have many more options than described
+here. Use the --help option to list them.
+
+
+Debian, Ubuntu, Linux Mint and other DEB based systems
+------------------------------------------------------
+
+To build the DEBs you need the following packages
+
+  $ apt-get install debhelper g++ cmake python3 \
+                    doxygen graphviz \
+                    libfuse-dev
+
+
+The command to build, from the directory of this file, is
+
+  $ ./scripts/debian_create.py --builddir=~/Tmp/builddir
+
+where builddir must be an non existent or empty folder. This builds
+a Debian source package and from it the binary packages using Debian
+specific tools. In the same builddir it creates the zip
+
+  fspropfaker-dist.tar.gz containing install and uninstall scripts,
+                            the DEBs binaries and development
+                            packages
+
+Once unzipped in a folder just run the script
+
+  $ ./install-bin.sh
+
+which uses 'dpkg -i' to install the DEBs.
+
+The corresponding ./uninstall-bin.sh script is also available.
+
+
+Other distributions
+-------------------
+
+Packages or libraries needed for building:
+- libfuse-dev (or -devel or similar)
+- g++ and cmake
+- doxygen and graphviz
+- python3
+
+To directly build and install the libraries to your system use
+
+  $ ./scripts/install_fspropfaker-all.py -b=Debug --installdir=/usr/local
+
+Compiles (debug mode) and installs all libraries and the executable
+to the directory (prefix) '/usr/local'.
+The first parameter can also be 'Release', 'MinSizeRel' or 'RelWithDebInfo'
+(see cmake documentation).
+The second parameter can be omitted ('/usr/local' is the default).
+
+If you want to determine the compiler that the scripts should use,
+set the variable CXX first (g++ is the preferred compiler). Ex.:
+
+  $ export CXX=g++
+
+If you want to add compiler options, define variable STMM_CPP_OPTIONS.
+Ex. (-Wsuggest-override is g++ only):
+
+  $ export STMM_CPP_OPTIONS="-Wsuggest-override -Werror"
+
+If you want to define "make" options, set variable STMM_MAKE_OPTIONS.
+Ex. (speed up compilation by using at most 2 CPUs):
+
+  $ export STMM_MAKE_OPTIONS="--jobs=2"
+
+If you want to install to your home folder (~/usr) instead of system wide
+
+  $ ./scripts/install_fspropfaker-all.py --installdir=/home/myname/usr --no-sudo
+
+and make sure needed bash environment variables are set before the call
+
+  $ # for the library loader
+  $ export LD_LIBRARY_PATH=/home/myname/usr/lib
+  $ # for pkg-config
+  $ export PKG_CONFIG_PATH=/home/myname/usr/lib/pkgconfig
+  $ # for g++ linker
+  $ export LIBRARY_PATH=/home/myname/usr/lib
+  $ # to find executable
+  $ export PATH=/home/myname/usr/bin:$PATH
+
+The installed libraries and binaries are
+- libfspropfaker
+
+
+To uninstall use the same installdir passed to install_fspropfaker-all.py.
+For example:
+
+  $ ./scripts/uninstall_fspropfaker-all.py -y --installdir=/usr/local

@@ -1,0 +1,17 @@
+# fspropfaker pkg-config source file
+
+prefix=@STMMI_INSTALL_PREFIX@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: fspropfaker
+Description: fuse based filesystem property faker
+Version: @FSPROPFAKER_VERSION@
+URL: http://www.efanomars.com/libraries/fspropfaker
+# Beware! The space between the library name and the comparison (>=) is necessary!
+Requires: fuse >= @FSPROPFAKER_REQ_FUSE_VERSION@
+Conflicts:
+Libs: -L${libdir} -lfspropfaker
+Cflags: -I${includedir}/fspropfaker -I${includedir}
+

@@ -1,0 +1,50 @@
+#============
+# fspropfaker
+#============
+
+Requirements
+------------
+g++ compiler or compatible (>= C++14)
+libfuse-dev
+
+
+
+Instructions
+------------
+
+From this directory execute the following commands:
+
+  $ mkdir build
+  $ cd build
+
+  $ cmake -D CMAKE_BUILD_TYPE=Release ..
+
+Instead of 'Release' CMAKE_BUILD_TYPE can also be set to
+   'Debug', 'MinSizeRel' or 'RelWithDebInfo'.
+To build the documentation add option (before '..')
+   '-D BUILD_DOCS=ON' to the preceding command.
+To build the tests add option
+   '-D BUILD_TESTING=ON' to the preceding command
+   (read below on how to setup google test).
+To change the default installation directory add definition
+   '-D CMAKE_INSTALL_PREFIX=/home/adam/mylib' to the preceding command.
+
+  $ make
+
+  $ sudo make install
+
+sudo might be omitted in the preceding command if installing to a directory 
+owned by the current user.
+
+  $ sudo ldconfig
+
+
+Alternatively you can just execute the script
+
+  $ ./scripts/install_fspropfaker.py -b=Release -t=On -d=On
+
+setting the parameter(s) to your preferred value (like above).
+
+  $ ./scripts/install_fspropfaker.py  --help
+
+for a description of all available options.

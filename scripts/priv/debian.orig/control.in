@@ -1,0 +1,46 @@
+Source: fspropfaker
+Priority: optional
+Maintainer: Stefano Marsili <efanomars@gmx.ch>
+Build-Depends: debhelper (>= 9)
+             , cmake
+             , python3
+             , doxygen
+             , graphviz
+             , libfuse-dev (>= @FSPROPFAKER_REQ_FUSE_VERSION@)
+Standards-Version: 3.9.8
+Section: libs
+Homepage: @STMMI_WEBSITE_SECTION@/fspropfaker
+Vcs-Git: https://www.gitlab.com/efanomars/fspropfaker.git
+#Vcs-Browser: https://www.gitlab.com/efanomars/fspropfaker.git
+
+
+Package: libfspropfaker@FSPROPFAKER_MAJOR_VERSION@
+Architecture: any
+Depends: libfuse2 (>= @FSPROPFAKER_REQ_FUSE_VERSION@)
+       , ${shlibs:Depends}, ${misc:Depends}
+Recommends:
+Suggests:
+Description: File-system property faker library based on libfuse
+ Fuse based library for C++ (C++14).
+ .
+ Can be integrated in your unit tests.
+ .
+ Currently this library can only fake file system size and free space.
+
+Package: libfspropfaker-dev
+Section: libdevel
+Architecture: any
+Depends: libfspropfaker@FSPROPFAKER_MAJOR_VERSION@ (= ${binary:Version})
+       , libfuse-dev (>= @FSPROPFAKER_REQ_FUSE_VERSION@)
+       , ${misc:Depends}
+Recommends:
+Description: File-system property faker library based on libfuse (develop)
+ Fuse based library for C++ (C++14).
+ .
+ Can be integrated in your unit tests.
+ .
+ Currently this library can only fake file system size and free space.
+ .
+ This package contains the development headers for the library found in
+ libfspropfaker@FSPROPFAKER_MAJOR_VERSION@.
+
