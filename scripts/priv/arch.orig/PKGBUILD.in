@@ -10,7 +10,7 @@ license=('GPL3')
 
 depends=(
     'fuse')
-makedepends=('cmake' 'gcc' 'doxygen' 'graphviz' 'python')
+makedepends=('cmake' 'doxygen' 'graphviz' 'python')
 optdepends=()
 
 #provides=("@STMMI_SOURCE_PROJECT@")
